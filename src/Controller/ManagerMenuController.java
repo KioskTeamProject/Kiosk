@@ -51,24 +51,50 @@ public class ManagerMenuController {
 
     /**
      * 2. 메뉴 삭제
-     *
-     * @param menuName : 메뉴명만 받아서 for문으로 리스트 삭제
+     * @param menuName : 메뉴명만 받아서 true,false확인 후 for문으로 해당 메뉴 삭제
      * @return
      */
     public boolean managerDeleteMenu(String menuName) {
-        for (int i = 0; i < cafeAdelist.size(); i++) {
-            if (cafeEspressolist.get(i).getMenuName().equals(menuName)) {
-                cafeEspressolist.remove(i);
-                return true;
-            } else if (cafeLattelist.get(i).getMenuName().equals(menuName)) {
-                cafeLattelist.remove(i);
-                return true;
-            } else if (cafeSmoothielist.get(i).getMenuName().equals(menuName)) {
-                cafeSmoothielist.remove(i);
-                return true;
-            } else if (cafeAdelist.get(i).getMenuName().equals(menuName)) {
-                cafeAdelist.remove(i);
-                return true;
+        boolean espressoResult = cafeEspressolist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuName));
+        boolean latteResult = cafeLattelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuName));
+        boolean smoothieResult = cafeSmoothielist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuName));
+        boolean adeResult = cafeAdelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuName));
+
+        if (espressoResult) {
+            for (int i = 0; i < cafeEspressolist.size(); i++) {
+                int indexOf = cafeEspressolist.get(i).getMenuName().indexOf(menuName);
+                if (indexOf == 0) {
+                    cafeEspressolist.remove(i);
+                    return true;
+                }
+            }
+        } else if (latteResult) {
+            for (int i = 0; i < cafeLattelist.size(); i++) {
+                int indexOf = cafeLattelist.get(i).getMenuName().indexOf(menuName);
+                if (indexOf == 0) {
+                    cafeLattelist.remove(i);
+                    return true;
+                }
+            }
+        } else if (smoothieResult) {
+            for (int i = 0; i < cafeSmoothielist.size(); i++) {
+                int indexOf = cafeSmoothielist.get(i).getMenuName().indexOf(menuName);
+                if (indexOf == 0) {
+                    cafeSmoothielist.remove(i);
+                    return true;
+                }
+            }
+        } else if (adeResult) {
+            for (int i = 0; i < cafeAdelist.size(); i++) {
+                int indexOf = cafeAdelist.get(i).getMenuName().indexOf(menuName);
+                if (indexOf == 0) {
+                    cafeAdelist.remove(i);
+                    return true;
+                }
             }
         }
         return false;
@@ -77,7 +103,7 @@ public class ManagerMenuController {
     /**
      * 3.오늘의 메뉴
      */
-    public String[] todayMenu() {
+    public static String[] todayMenu() {
         List<MenuCategory> allMenuCategoryList = new ArrayList<>();
         allMenuCategoryList.addAll(cafeEspressolist);
         allMenuCategoryList.addAll(cafeLattelist);
@@ -112,7 +138,7 @@ public class ManagerMenuController {
                 int indexOf = cafeEspressolist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeEspressolist
-                            .get(i).setMenuPrice(cafeEspressolist.get(i).getMenuPrice()-(cafeEspressolist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice(cafeEspressolist.get(i).getMenuPrice() - (cafeEspressolist.get(i).getMenuPrice() / randomDiscountNum));
                 }
             }
         } else if (latteResult) {
@@ -120,43 +146,44 @@ public class ManagerMenuController {
                 int indexOf = cafeLattelist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeLattelist
-                            .get(i).setMenuPrice(cafeLattelist.get(i).getMenuPrice()-(cafeLattelist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice(cafeLattelist.get(i).getMenuPrice() - (cafeLattelist.get(i).getMenuPrice() / randomDiscountNum));
                 }
             }
-        }else if (smoothieResult) {
+        } else if (smoothieResult) {
             for (int i = 0; i < cafeSmoothielist.size(); i++) {
                 int indexOf = cafeSmoothielist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeSmoothielist
-                            .get(i).setMenuPrice(cafeSmoothielist.get(i).getMenuPrice()-(cafeSmoothielist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice(cafeSmoothielist.get(i).getMenuPrice() - (cafeSmoothielist.get(i).getMenuPrice() / randomDiscountNum));
                 }
             }
-        }else if (adeResult) {
+        } else if (adeResult) {
             for (int i = 0; i < cafeAdelist.size(); i++) {
                 int indexOf = cafeAdelist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeAdelist
-                            .get(i).setMenuPrice(cafeAdelist.get(i).getMenuPrice()-(cafeAdelist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice(cafeAdelist.get(i).getMenuPrice() - (cafeAdelist.get(i).getMenuPrice() / randomDiscountNum));
                 }
             }
         }
         return randomResult;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ /*
+            if (cafeEspressolist.get(i).getMenuName().equals(menuName)) {
+                cafeEspressolist.remove(i);
+                return true;
+            } else if (cafeLattelist.get(i).getMenuName().equals(menuName)) {
+                cafeLattelist.remove(i);
+                return true;
+            } else if (cafeSmoothielist.get(i).getMenuName().equals(menuName)) {
+                cafeSmoothielist.remove(i);
+                return true;
+            } else if (cafeAdelist.get(i).getMenuName().equals(menuName)) {
+                cafeAdelist.remove(i);
+                return true;
+            }
+             */
 }
 
 

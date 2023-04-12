@@ -1,6 +1,8 @@
 package model.Manager;
 
 import Controller.ManagerMenuController;
+import Controller.MembershipCardController;
+import model.Manager.util.Utility;
 import model.User.MenuCategory;
 import model.User.MenuCategoryRepository;
 
@@ -18,10 +20,16 @@ public class Test {
 
     public static void main(String[] args) {
       ManagerMenuController mmc = new ManagerMenuController();
-
-
-        String[] strings = mmc.todayMenu();
-        System.out.println(strings[1]);
+        MembershipCardController mc = new MembershipCardController();
+        String deleteSerial = "bbbb";
+        System.out.println(mc.viewAllMember());
+        for (int i = 0; i <card.size() ; i++) {
+            if (card.get(i).getMemberShipSerial().equals(deleteSerial)){
+                card.remove(i);
+            }
+        }
+        Utility.makeLine();
+        System.out.println(mc.viewAllMember());
 
     }
 }

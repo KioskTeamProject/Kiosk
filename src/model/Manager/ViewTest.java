@@ -33,22 +33,22 @@ public class ViewTest {
             switch (managerInputNum) {
 
                 case "1" :
-                    addMenu();
+                    System.out.println(manageMenu.viewAllMenu());
+//                    addMenu();
                     break;
                 case "2" :
-
                     deleteMenu();
                     break;
 
                 case "3" :
                     todayMenu();
                     break;
-                    /*
+
                 case "4" :
                     accountBook();
                     break;
 
-                 */
+
                 case "5":
                     membershipCard();
                     break;
@@ -61,24 +61,10 @@ public class ViewTest {
         }
     }
 
-    private static void todayMenu() {
-        String[] todayMenu = manageMenu.todayMenu();
-        String todayMenuName = todayMenu[0];
-        String todayMenuDiscount = todayMenu[1];
-        System.out.printf("오늘의 메뉴는 [%s]이며, 할인율은 [%s%%]입니다.\n",todayMenuName,todayMenuDiscount);
-    }
 
-    private static void deleteMenu() {
-        System.out.println("[*****메뉴 삭제*****]");
-        String deleteMenuName = input("삭제할 메뉴명을 입력해주세요 : ");
-        boolean deleteResult = manageMenu.managerDeleteMenu(deleteMenuName);
-            if (deleteResult){
-                System.out.println("삭제에 성공했습니다.");
-            }else {
-                System.out.println("일치하는 메뉴명이 없습니다.");
-            }
-    }
 
+    //------------------------------------------------------------------------
+    //1.메뉴추가
     private static void addMenu() {
         System.out.println("[*****메뉴 추가*****]");
         System.out.println("카테고리를 선택해주세요");
@@ -95,8 +81,31 @@ public class ViewTest {
         }
     }
 
-    //1.메뉴 추가
-    //----------------------------------------------------------------------
+    //2.메뉴 삭제
+    private static void deleteMenu() {
+        System.out.println("[*****메뉴 삭제*****]");
+        System.out.println(manageMenu.viewAllMenu());
+        String deleteMenuName = input("삭제할 메뉴명을 입력해주세요 : ");
+        boolean deleteResult = manageMenu.managerDeleteMenu(deleteMenuName);
+        if (deleteResult){
+            System.out.println("삭제에 성공했습니다.");
+        }else {
+            System.out.println("일치하는 메뉴명이 없습니다.");
+        }
+    }
+
+    //3.오늘의 메뉴
+    private static void todayMenu() {
+        String[] todayMenu = manageMenu.todayMenu();
+        String todayMenuName = todayMenu[0];
+        String todayMenuDiscount = todayMenu[1];
+        System.out.printf("오늘의 메뉴는 [%s]이며, 할인율은 [%s%%]입니다.\n",todayMenuName,todayMenuDiscount);
+    }
+
+    //4.가계부
+    private static void accountBook() {
+    }
+
     //5.카드 관리
     private static void membershipCard() {
         while (true) {
@@ -157,6 +166,7 @@ public class ViewTest {
     }
 
     //----------------------------------------------------------------------
+    //첫 진입 화면
     private static void choiceManageMenu() {
         System.out.println("1. 메뉴 추가");
         System.out.println("2. 메뉴 삭제");
