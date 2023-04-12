@@ -27,49 +27,45 @@ public class ViewTest {
     private static void start() {
         managerLogin();
         System.out.println("[관리자 계정으로 로그인하셨습니다.]");
-        choiceManageMenu();
-        String managerInputNum = input(">> 메뉴를 선택해주세요.");
-        switch (managerInputNum) {
+        while (true) {
+            choiceManageMenu();
+            String managerInputNum = input(">> 메뉴를 선택해주세요.");
+            switch (managerInputNum) {
 
-            case "1" :
-                AddMenu();
-                break;
-            case "2" :
+                case "1" :
+                    System.out.println(manageMenu.viewAllMenu());
+//                    addMenu();
+                    break;
+                case "2" :
+                    deleteMenu();
+                    break;
 
-                deleteMenu();
-                break;
-                 /*
-            case "3" :
-                TodayMenu();
-                break;
-            case "4" :
-                AccountBook();
-                break;
+                case "3" :
+                    todayMenu();
+                    break;
 
-             */
-            case "5":
-                MembershipCard();
-                break;
-            case "6":
-                System.exit(0);
-                break;
-            default:
-                System.out.println("잘못입력하셨습니다. 다시 입력해주세요");
+                case "4" :
+                    accountBook();
+                    break;
+
+
+                case "5":
+                    membershipCard();
+                    break;
+                case "6":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("잘못입력하셨습니다. 다시 입력해주세요");
+            }
         }
     }
 
-    private static void deleteMenu() {
-        System.out.println("[*****메뉴 삭제*****]");
-        String deleteMenuName = input("삭제할 메뉴명을 입력해주세요 : ");
-        boolean deleteResult = manageMenu.managerDeleteMenu(deleteMenuName);
-            if (deleteResult){
-                System.out.println("삭제에 성공했습니다.");
-            }else {
-                System.out.println("일치하는 메뉴명이 없습니다.");
-            }
-    }
 
-    private static void AddMenu() {
+
+    //------------------------------------------------------------------------
+    //1.메뉴추가
+    private static void addMenu() {
         System.out.println("[*****메뉴 추가*****]");
         System.out.println("카테고리를 선택해주세요");
         System.out.println("[1.에스프레소], [2.라떼], [3.프라페&스무디], [4.티&에이드]");
@@ -85,10 +81,33 @@ public class ViewTest {
         }
     }
 
-    //1.메뉴 추가
-    //----------------------------------------------------------------------
+    //2.메뉴 삭제
+    private static void deleteMenu() {
+        System.out.println("[*****메뉴 삭제*****]");
+        System.out.println(manageMenu.viewAllMenu());
+        String deleteMenuName = input("삭제할 메뉴명을 입력해주세요 : ");
+        boolean deleteResult = manageMenu.managerDeleteMenu(deleteMenuName);
+        if (deleteResult){
+            System.out.println("삭제에 성공했습니다.");
+        }else {
+            System.out.println("일치하는 메뉴명이 없습니다.");
+        }
+    }
+
+    //3.오늘의 메뉴
+    private static void todayMenu() {
+        String[] todayMenu = manageMenu.todayMenu();
+        String todayMenuName = todayMenu[0];
+        String todayMenuDiscount = todayMenu[1];
+        System.out.printf("오늘의 메뉴는 [%s]이며, 할인율은 [%s%%]입니다.\n",todayMenuName,todayMenuDiscount);
+    }
+
+    //4.가계부
+    private static void accountBook() {
+    }
+
     //5.카드 관리
-    private static void MembershipCard() {
+    private static void membershipCard() {
         while (true) {
             System.out.println("1.카드 추가");
             System.out.println("2.카드 삭제");
@@ -116,7 +135,7 @@ public class ViewTest {
                         }
                         break;
                     }
-                    break; // 오류 수정해야함
+                    break; // 오류 수정해야함 -> 0412수정 완료
 
                 case "2":
                     while (true) {
@@ -138,7 +157,7 @@ public class ViewTest {
                     break;
                 case "4":
                     //오류 수정해야함
-                    break;
+                    return;
                 default:
                     System.out.println("정확한 번호를 입력해주세요.");
             }
@@ -147,6 +166,7 @@ public class ViewTest {
     }
 
     //----------------------------------------------------------------------
+    //첫 진입 화면
     private static void choiceManageMenu() {
         System.out.println("1. 메뉴 추가");
         System.out.println("2. 메뉴 삭제");
