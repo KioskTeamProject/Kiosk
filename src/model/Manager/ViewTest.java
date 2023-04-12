@@ -27,34 +27,36 @@ public class ViewTest {
     private static void start() {
         managerLogin();
         System.out.println("[관리자 계정으로 로그인하셨습니다.]");
-        choiceManageMenu();
-        String managerInputNum = input(">> 메뉴를 선택해주세요.");
-        switch (managerInputNum) {
+        while (true) {
+            choiceManageMenu();
+            String managerInputNum = input(">> 메뉴를 선택해주세요.");
+            switch (managerInputNum) {
 
-            case "1" :
-                AddMenu();
-                break;
-            case "2" :
+                case "1" :
+                    AddMenu();
+                    break;
+                case "2" :
 
-                deleteMenu();
-                break;
-                 /*
-            case "3" :
-                TodayMenu();
-                break;
-            case "4" :
-                AccountBook();
-                break;
+                    deleteMenu();
+                    break;
+                     /*
+                case "3" :
+                    TodayMenu();
+                    break;
+                case "4" :
+                    AccountBook();
+                    break;
 
-             */
-            case "5":
-                MembershipCard();
-                break;
-            case "6":
-                System.exit(0);
-                break;
-            default:
-                System.out.println("잘못입력하셨습니다. 다시 입력해주세요");
+                 */
+                case "5":
+                    MembershipCard();
+                    break;
+                case "6":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("잘못입력하셨습니다. 다시 입력해주세요");
+            }
         }
     }
 
@@ -116,7 +118,7 @@ public class ViewTest {
                         }
                         break;
                     }
-                    break; // 오류 수정해야함
+                    break; // 오류 수정해야함 -> 0412수정 완료
 
                 case "2":
                     while (true) {
@@ -138,7 +140,7 @@ public class ViewTest {
                     break;
                 case "4":
                     //오류 수정해야함
-                    break;
+                    return;
                 default:
                     System.out.println("정확한 번호를 입력해주세요.");
             }
