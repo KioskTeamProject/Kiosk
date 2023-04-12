@@ -33,23 +33,24 @@ public class ViewTest {
             switch (managerInputNum) {
 
                 case "1" :
-                    AddMenu();
+                    addMenu();
                     break;
                 case "2" :
 
                     deleteMenu();
                     break;
-                     /*
+
                 case "3" :
-                    TodayMenu();
+                    todayMenu();
                     break;
+                    /*
                 case "4" :
-                    AccountBook();
+                    accountBook();
                     break;
 
                  */
                 case "5":
-                    MembershipCard();
+                    membershipCard();
                     break;
                 case "6":
                     System.exit(0);
@@ -58,6 +59,13 @@ public class ViewTest {
                     System.out.println("잘못입력하셨습니다. 다시 입력해주세요");
             }
         }
+    }
+
+    private static void todayMenu() {
+        String[] todayMenu = manageMenu.todayMenu();
+        String todayMenuName = todayMenu[0];
+        String todayMenuDiscount = todayMenu[1];
+        System.out.printf("오늘의 메뉴는 [%s]이며, 할인율은 [%s%%]입니다.\n",todayMenuName,todayMenuDiscount);
     }
 
     private static void deleteMenu() {
@@ -71,7 +79,7 @@ public class ViewTest {
             }
     }
 
-    private static void AddMenu() {
+    private static void addMenu() {
         System.out.println("[*****메뉴 추가*****]");
         System.out.println("카테고리를 선택해주세요");
         System.out.println("[1.에스프레소], [2.라떼], [3.프라페&스무디], [4.티&에이드]");
@@ -90,7 +98,7 @@ public class ViewTest {
     //1.메뉴 추가
     //----------------------------------------------------------------------
     //5.카드 관리
-    private static void MembershipCard() {
+    private static void membershipCard() {
         while (true) {
             System.out.println("1.카드 추가");
             System.out.println("2.카드 삭제");

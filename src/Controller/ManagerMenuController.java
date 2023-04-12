@@ -1,13 +1,16 @@
 package Controller;
 
 import model.User.MenuCategory;
+
 import static model.Repository.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerMenuController {
-       /**
+    /**
      * 1. 메뉴 추가
+     *
      * @param selectCategory : 메뉴 추가 버튼에서 카테고리 입력
      *                       menuName, menuPrice, optionMenuName : 생성자
      * @return : boolean
@@ -34,6 +37,7 @@ public class ManagerMenuController {
 
     /**
      * 1+a. 전체 메뉴 출력
+     *
      * @return : <List> allMenuCategoryList
      */
     public List viewAllMenu() {
@@ -47,6 +51,7 @@ public class ManagerMenuController {
 
     /**
      * 2. 메뉴 삭제
+     *
      * @param menuName : 메뉴명만 받아서 for문으로 리스트 삭제
      * @return
      */
@@ -72,8 +77,7 @@ public class ManagerMenuController {
     /**
      * 3.오늘의 메뉴
      */
-    public void todayMenu() {
-        //새로운 배열을 만들어 모든 메뉴 넣기
+    public String[] todayMenu() {
         List<MenuCategory> allMenuCategoryList = new ArrayList<>();
         allMenuCategoryList.addAll(cafeEspressolist);
         allMenuCategoryList.addAll(cafeLattelist);
@@ -81,17 +85,79 @@ public class ManagerMenuController {
         allMenuCategoryList.addAll(cafeAdelist);
 
         //Math.ramdom() * (y -x +1) + x
-        //배열의 총 합을 구한 후 0~배열의수 -1까지 랜덤 숫자 반환
-        //if 20개면 0~19
-        //할인율 1~10%까지
-        int randomDiscountNum = (int)(Math.random() * 10) + 1;
-        int randomMenuNum = (int)(Math.random() * allMenuCategoryList.size());
-        String randomMenu = allMenuCategoryList.get(randomMenuNum).getMenuName();
-//        if(cafe)
-        //랜덤숫자(길이)만큼 출력 -> 이름을 반환 -> 그 이름에 맞는 메뉴를 찾고 setPrice;
 
+        //할인율 1~10%까지
+        int randomDiscountNum = (int) (Math.random() * 10) + 1;
+        int randomMenuNum = (int) (Math.random() * allMenuCategoryList.size());
+        //랜덤숫자(길이)만큼 출력 -> 이름을 반환 -> 그 이름에 맞는 메뉴를 찾고 setPrice;
+        String randomMenu = allMenuCategoryList.get(randomMenuNum).getMenuName();
+        //오늘의 메뉴와 할인율을 String으로 반환
+        String[] randomResult = {randomMenu, String.valueOf(randomDiscountNum)};
+
+        /**
+         * 각 배열에 randomMenu와 같은 메뉴명이 있는지 확인
+         * 각각의 boolean을 받아 setMenuPrice실행
+         */
+        boolean espressoResult = cafeEspressolist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(randomMenu));
+        boolean latteResult = cafeLattelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(randomMenu));
+        boolean smoothieResult = cafeSmoothielist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(randomMenu));
+        boolean adeResult = cafeAdelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(randomMenu));
+
+        if (espressoResult) {
+            for (int i = 0; i < cafeEspressolist.size(); i++) {
+                int indexOf = cafeEspressolist.get(i).getMenuName().indexOf(randomMenu);
+                if (indexOf == 0) {
+                    cafeEspressolist
+                            .get(i).setMenuPrice(cafeEspressolist.get(i).getMenuPrice()-(cafeEspressolist.get(i).getMenuPrice() / randomDiscountNum));
+                }
+            }
+        } else if (latteResult) {
+            for (int i = 0; i < cafeLattelist.size(); i++) {
+                int indexOf = cafeLattelist.get(i).getMenuName().indexOf(randomMenu);
+                if (indexOf == 0) {
+                    cafeLattelist
+                            .get(i).setMenuPrice(cafeLattelist.get(i).getMenuPrice()-(cafeLattelist.get(i).getMenuPrice() / randomDiscountNum));
+                }
+            }
+        }else if (smoothieResult) {
+            for (int i = 0; i < cafeSmoothielist.size(); i++) {
+                int indexOf = cafeSmoothielist.get(i).getMenuName().indexOf(randomMenu);
+                if (indexOf == 0) {
+                    cafeSmoothielist
+                            .get(i).setMenuPrice(cafeSmoothielist.get(i).getMenuPrice()-(cafeSmoothielist.get(i).getMenuPrice() / randomDiscountNum));
+                }
+            }
+        }else if (adeResult) {
+            for (int i = 0; i < cafeAdelist.size(); i++) {
+                int indexOf = cafeAdelist.get(i).getMenuName().indexOf(randomMenu);
+                if (indexOf == 0) {
+                    cafeAdelist
+                            .get(i).setMenuPrice(cafeAdelist.get(i).getMenuPrice()-(cafeAdelist.get(i).getMenuPrice() / randomDiscountNum));
+                }
+            }
         }
+        return randomResult;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
