@@ -112,8 +112,8 @@ public class ManagerMenuController {
 
         //Math.ramdom() * (y -x +1) + x
 
-        //할인율 1~10%까지
-        int randomDiscountNum = (int) (Math.random() * 10) + 1;
+        //할인율 1~20%까지
+        int randomDiscountNum = (int) (Math.random() * 20) + 1;
         int randomMenuNum = (int) (Math.random() * allMenuCategoryList.size());
         //랜덤숫자(길이)만큼 출력 -> 이름을 반환 -> 그 이름에 맞는 메뉴를 찾고 setPrice;
         String randomMenu = allMenuCategoryList.get(randomMenuNum).getMenuName();
@@ -138,7 +138,7 @@ public class ManagerMenuController {
                 int indexOf = cafeEspressolist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeEspressolist
-                            .get(i).setMenuPrice(cafeEspressolist.get(i).getMenuPrice() - (cafeEspressolist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice((int) (cafeEspressolist.get(i).getMenuPrice() - (cafeEspressolist.get(i).getMenuPrice() * (randomDiscountNum*0.01))));
                 }
             }
         } else if (latteResult) {
@@ -146,7 +146,7 @@ public class ManagerMenuController {
                 int indexOf = cafeLattelist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeLattelist
-                            .get(i).setMenuPrice(cafeLattelist.get(i).getMenuPrice() - (cafeLattelist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice((int) (cafeLattelist.get(i).getMenuPrice() - (cafeLattelist.get(i).getMenuPrice() * (randomDiscountNum*0.01))));
                 }
             }
         } else if (smoothieResult) {
@@ -154,7 +154,7 @@ public class ManagerMenuController {
                 int indexOf = cafeSmoothielist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeSmoothielist
-                            .get(i).setMenuPrice(cafeSmoothielist.get(i).getMenuPrice() - (cafeSmoothielist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice((int) (cafeSmoothielist.get(i).getMenuPrice() - (cafeSmoothielist.get(i).getMenuPrice() * (randomDiscountNum*0.01))));
                 }
             }
         } else if (adeResult) {
@@ -162,7 +162,7 @@ public class ManagerMenuController {
                 int indexOf = cafeAdelist.get(i).getMenuName().indexOf(randomMenu);
                 if (indexOf == 0) {
                     cafeAdelist
-                            .get(i).setMenuPrice(cafeAdelist.get(i).getMenuPrice() - (cafeAdelist.get(i).getMenuPrice() / randomDiscountNum));
+                            .get(i).setMenuPrice((int) (cafeAdelist.get(i).getMenuPrice() - (cafeAdelist.get(i).getMenuPrice() * (randomDiscountNum*0.01))));
                 }
             }
         }
