@@ -32,6 +32,7 @@ public class Test {
 //        System.out.println(mc.viewAllMember());
         boolean aaaa = mc.isRegistered("aaaa");
         System.out.println("aaaa = " + aaaa);
+        System.out.println("1");
     }
 }
 
