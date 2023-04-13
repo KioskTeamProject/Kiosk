@@ -12,6 +12,7 @@ public class Repository {
     public static List<MenuCategory> cafeLattelist;
     public static List<MenuCategory> cafeSmoothielist;
     public static List<MenuCategory> cafeAdelist;
+
     static {
         card = new ArrayList<>();
         card.add(new MembershipCard("aaaa",10000,"홍길동"));
@@ -46,5 +47,8 @@ public class Repository {
         cafeAdelist.add(new MenuCategory("자몽티", 4500, "사이즈업"));
         cafeAdelist.add(new MenuCategory("자몽에이드", 4500, "사이즈업"));
         cafeAdelist.add(new MenuCategory("오미자에이드", 4500, "사이즈업"));
+
+
     }
+
 }
