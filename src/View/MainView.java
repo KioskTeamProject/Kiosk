@@ -1,13 +1,12 @@
-package model.Manager;
+package View;
 
 import Controller.ManagerMenuController;
 import Controller.MembershipCardController;
-
-import java.util.List;
+import model.Manager.Manager;
 
 import static model.Manager.util.Utility.*;
 
-public class ViewTest {
+public class MainView {
     public static Manager manager;
     public static MembershipCardController manageCard;
     public static ManagerMenuController manageMenu;
@@ -20,11 +19,11 @@ public class ViewTest {
     }
 
     public static void main(String[] args) {
-        start();
+        managerStart();
     }
 
 
-    private static void start() {
+    private static void managerStart() {
         managerLogin();
         System.out.println("[관리자 계정으로 로그인하셨습니다.]");
         while (true) {
