@@ -1,6 +1,10 @@
 package Controller;
 
 import model.Manager.MembershipCard;
+import model.User.MenuCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static model.Repository.*;
 
@@ -17,12 +21,87 @@ public class UserController {
     }
 
     // 충전금액을 입력하면 충전해주고 현재잔액을 반환하는 기능
-    public void pointCharge(String pointCharge) {
+    public void pointCharge(MembershipCard userCard, String inputNum) {
+        switch (inputNum){
+            case "1":
+                userCard.setMemberShipAmount(userCard.getMemberShipAmount()+10000);
+                break;
+            case "2":
+                userCard.setMemberShipAmount(userCard.getMemberShipAmount()+20000);
+                break;
+            case "3":
+                userCard.setMemberShipAmount(userCard.getMemberShipAmount()+30000);
+                break;
+        }
+    }
+
+    // 카테고리를 입력받아 해당 카테고리를 반환해주는 기능
+    public List<MenuCategory> menuCategories(String inputNum){
+        switch (inputNum){
+            case "1":
+                return cafeEspressolist;
+            case "2":
+                return cafeLattelist;
+            case "3":
+                return cafeSmoothielist;
+            case "4":
+                return cafeAdelist;
+        }
+        return null;
+    }
+
+    public boolean menuCartIn(String menuinput) {
+        menuOption(menuinput);
+        ArrayList<String> menuCart = new ArrayList<>();
+        boolean espressoList = cafeEspressolist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuinput));
+        boolean latteList = cafeLattelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuinput));
+        boolean smoothieList = cafeSmoothielist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuinput));
+        boolean adeList = cafeAdelist.stream()
+                .anyMatch(menu -> menu.getMenuName().equals(menuinput));
+        if (espressoList) {
+            for (int i = 0; i < cafeEspressolist.size(); i++) {
+                int indexOf = cafeEspressolist.get(i).getMenuName().indexOf(menuinput);
+                if (indexOf == 0) {
+                    menuCart.add(menuinput);
+                    return true;
+                }
+            }
+        } else if (latteList) {
+            for (int i = 0; i < cafeLattelist.size(); i++) {
+                int indexOf = cafeLattelist.get(i).getMenuName().indexOf(menuinput);
+                if (indexOf == 0) {
+                    menuCart.add(menuinput);
+                    return true;
+                }
+            }
+        } else if (smoothieList) {
+            for (int i = 0; i < cafeSmoothielist.size(); i++) {
+                int indexOf = cafeSmoothielist.get(i).getMenuName().indexOf(menuinput);
+                if (indexOf == 0) {
+                    menuCart.add(menuinput);
+                    return true;
+                }
+            }
+        } else if (adeList) {
+            for (int i = 0; i < cafeAdelist.size(); i++) {
+                int indexOf = cafeAdelist.get(i).getMenuName().indexOf(menuinput);
+                if (indexOf == 0) {
+                    menuCart.add(menuinput);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //메뉴를 선택 받으면 ice를 선택할지 hot을 선택할지 고르는 기능
+    private void menuOption(String menuinput) {
 
     }
 
-
-    // 카테고리를 입력받아 해당 카테고리를 반환해주는 기능
 
     // 메뉴 상태 옵션을 입력받아 장바구니에 담는 기능 , 장바구니에 담은 걸 반환하는 기능
 
