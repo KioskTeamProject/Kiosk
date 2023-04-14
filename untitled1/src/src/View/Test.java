@@ -1,6 +1,5 @@
-package View;
+package src.View;
 
-import Controller.UserController;
 public class Test {
     public static void main(String[] args) {
 
@@ -8,6 +7,5 @@ public class Test {
 //        con.checkSerialNumber("a1234");
         UserView view = new UserView();
         view.start();
-
     }
 }

@@ -50,9 +50,12 @@ public class UserController {
         return null;
     }
 
-    public boolean menuCartIn(String menuinput) {
-        menuOption(menuinput);
+
+
+    // menuCart 에 해당 값 저장
+    // 사용자가 선택한 메뉴를 가져와서 카트에 담는 기능
         ArrayList<String> menuCart = new ArrayList<>();
+    public boolean menuCartIn(String menuinput) {
         boolean espressoList = cafeEspressolist.stream()
                 .anyMatch(menu -> menu.getMenuName().equals(menuinput));
         boolean latteList = cafeLattelist.stream()
@@ -97,10 +100,14 @@ public class UserController {
         return false;
     }
 
-    //메뉴를 선택 받으면 ice를 선택할지 hot을 선택할지 고르는 기능
-    private void menuOption(String menuinput) {
-
+    public void menuOption(boolean cartIn, String optionchoice) {
+        if(optionchoice.equals("y")){
+            menuCart.add()
+        }
     }
+
+
+    //메뉴를 선택 받으면 ice를 선택할지 hot을 선택할지 고르는 기능
 
 
     // 메뉴 상태 옵션을 입력받아 장바구니에 담는 기능 , 장바구니에 담은 걸 반환하는 기능
@@ -112,3 +119,9 @@ public class UserController {
     // 장바구니 입력받아서 결제하는 기능(영수증)
 
 }
+
+
+
+
+
+
