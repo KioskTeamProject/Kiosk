@@ -102,16 +102,38 @@ public class UserView {
             for (int i = 0; i < collect.size(); i++) {
                 System.out.println(i+1+". "+collect.get(i));
             }
-            System.out.println("메뉴를 선택해주세요. 뒤로가실려면 0번을 입력해주세요\n");
-            String menuinput = input(">>\n");
+            while (true) {
+                boolean cartIn;
+                System.out.println("메뉴를 선택해주세요. 뒤로가실려면 0번을 입력해주세요\n");
+                String menuinput = input(">>\n");
+                if (menuinput.equals("0")) {
+                  return;
+                }else if(menuinput.equals("1") || menuinput.equals("2") || menuinput.equals("3") ||
+                        menuinput.equals("4") || menuinput.equals("5")){
+                   cartIn = user.menuCartIn(menuinput);
+                }else {
+                    System.out.println("번호를 다시입력해주세요");
+                    return;
+                    continue;
+                }
+                String optionchoice = input("[핫]/[아이스] 선택해주세요");
+                user.menuOption(cartIn, optionchoice);
+            }
 
 
-            String optionchoice = input("[핫]/[아이스] 선택해주세요");
 
-            String inputNum2 = input("# 0. 이전으로 가기\n>>");
-            boolean CartLists = user.menuCartIn(menuinput);
 
-            if(inputNum2.equals("0")) continue;
+//
+//
+
+
+//            String inputNum2 = input("# 0. 이전으로 가기\n>>");
+
+
+
+
+
+
 
         }
 
@@ -128,3 +150,10 @@ public class UserView {
 // 장바구니 입력받아서 결제하는 기능(영수증)
 
 }
+
+
+
+
+
+
+
